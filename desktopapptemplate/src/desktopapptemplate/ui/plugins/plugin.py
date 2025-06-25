@@ -1,9 +1,7 @@
 from PySide6.QtWidgets import QWidget
 
-from desktopapptemplate.core.plugins.plugin import Plugin
 
-
-class Plugin(QWidget, Plugin):
+class Plugin(QWidget):
     def __init__(self, name, display_name, version):
         super(Plugin, self).__init__()
         self._name = name

@@ -6,6 +6,7 @@ class Plugin:
         DATA = 1
         LOADER = 2
         PROCESSOR = 3
+        VIEW = 4
 
     def __init__(self, name, display_name, type, version):
         self._name = name

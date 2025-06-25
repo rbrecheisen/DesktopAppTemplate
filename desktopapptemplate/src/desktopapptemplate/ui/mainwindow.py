@@ -17,6 +17,7 @@ from desktopapptemplate.ui.panels.mainpanel import MainPanel
 from desktopapptemplate.ui.utils import resource_path, version, is_macos
 from desktopapptemplate.core.plugins.plugin import Plugin
 from desktopapptemplate.core.plugins.pluginmanager import PluginManager
+from desktopapptemplate.ui.plugins.views.viewpluginmanager import ViewPluginManager
 
 
 class MainWindow(QMainWindow):
@@ -56,6 +57,7 @@ class MainWindow(QMainWindow):
         manager = PluginManager()
         for plugin in manager.plugins(plugin_type=Plugin.Type.LOADER):
             data_menu_action = QAction(plugin.display_name(), self)
+            data_menu_action.triggered.connect(ViewPluginManager.view_for(plugin).show)
             data_menu.addAction(data_menu_action)
 
     def init_status_bar(self):
