@@ -1,2 +1,2 @@
 # DesktopAppTemplate
-Template PySide6 using plugins
+Template PySide6 using plugins.
