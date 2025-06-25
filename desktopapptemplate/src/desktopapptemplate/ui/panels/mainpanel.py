@@ -9,29 +9,30 @@ from PySide6.QtWidgets import (
 import desktopapptemplate.ui.constants as constants
 
 from desktopapptemplate.ui.settings import Settings
+from desktopapptemplate.ui.panels.logpanel import LogPanel
+from desktopapptemplate.core.logging import LogManager
+
+LOG = LogManager()
 
 
 class MainPanel(QWidget):
     def __init__(self, parent):
         super(MainPanel, self).__init__(parent)
         self._settings = None
-        self._input_directory_label = None
         self._input_directory_button = None
         self._input_directory = None
-        self._files = None
-        self._output_directory_label = None
         self._output_directory_button = None
         self._output_directory = None
         self._run_pipeline_button = None
+        self._log_panel = None
         self.init_panel()
 
     def init_panel(self):
         layout = QVBoxLayout()
         layout.addWidget(self.input_directory_button())
         layout.addWidget(self.output_directory_button())
-        # layout.addWidget(self.input_directory_label())
-        # layout.addWidget(self.output_directory_label())
         layout.addWidget(self.run_pipeline_button())
+        layout.addWidget(self.log_panel())
         self.setLayout(layout)
 
     # GETTERS
@@ -41,11 +42,6 @@ class MainPanel(QWidget):
             self._settings = Settings()
         return self._settings
 
-    def input_directory_label(self):
-        if not self._input_directory_label:
-            self._input_directory_label = QLabel('input directory: not selected')
-        return self._input_directory_label
-    
     def input_directory_button(self):
         if not self._input_directory_button:
             self._input_directory_button = QPushButton('Select input directory')
@@ -57,18 +53,7 @@ class MainPanel(QWidget):
     
     def set_input_directory(self, directory):
         self._input_directory = directory
-        self.input_directory_label().setText(f'input directory: {self._input_directory}')
         self.output_directory_button().setEnabled(True)
-    
-    def files(self):
-        if not self._files:
-            self._files = []
-        return self._files
-    
-    def output_directory_label(self):
-        if not self._output_directory_label:
-            self._output_directory_label = QLabel('output directory: not selected')
-        return self._output_directory_label
     
     def output_directory_button(self):
         if not self._output_directory_button:
@@ -82,7 +67,6 @@ class MainPanel(QWidget):
     
     def set_output_directory(self, directory):
         self._output_directory = directory
-        self.output_directory_label().setText(f'output directory: {self._output_directory}')
         self.run_pipeline_button().setEnabled(True)
 
     def run_pipeline_button(self):
@@ -92,6 +76,11 @@ class MainPanel(QWidget):
             self._run_pipeline_button.setEnabled(False)
         return self._run_pipeline_button
     
+    def log_panel(self):
+        if not self._log_panel:
+            self._log_panel = LogPanel()
+        return self._log_panel
+
     # EVENT HANDLERS
 
     def handle_open_input_directory(self):
