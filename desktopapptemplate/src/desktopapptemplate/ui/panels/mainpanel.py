@@ -94,7 +94,7 @@ class MainPanel(QWidget):
     # EVENT HANDLERS
 
     def handle_donate(self):
-        webbrowser.open('https://rbeesoft.nl/wordpress/')
+        webbrowser.open(constants.DESKTOPAPPTEMPLATE_DONATE_URL)
 
     def handle_open_input_directory(self):
         last_directory = self.settings().get(constants.DESKTOPAPPTEMPLATE_LAST_DIRECTORY_KEY)
