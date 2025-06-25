@@ -2,4 +2,5 @@ from desktopapptemplate.core.plugins.plugin import Plugin
 
 
 class DataPlugin(Plugin):
-    pass
+    def __init__(self, name, version):
+        super(DataPlugin, self).__init__(name, version)

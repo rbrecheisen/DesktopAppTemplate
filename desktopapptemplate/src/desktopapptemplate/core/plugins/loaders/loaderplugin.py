@@ -2,4 +2,5 @@ from desktopapptemplate.core.plugins.plugin import Plugin
 
 
 class LoaderPlugin(Plugin):
-    pass
+    def __init__(self, name, version):
+        super(LoaderPlugin, self).__init__(name, version)

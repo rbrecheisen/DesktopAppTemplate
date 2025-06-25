@@ -14,7 +14,7 @@ import desktopapptemplate.ui.constants as constants
 
 from desktopapptemplate.ui.settings import Settings
 from desktopapptemplate.ui.panels.mainpanel import MainPanel
-from desktopapptemplate.ui.utils import resource_path, version, icon, is_macos
+from desktopapptemplate.ui.utils import resource_path, version, is_macos
 
 
 class MainWindow(QMainWindow):
@@ -35,9 +35,9 @@ class MainWindow(QMainWindow):
         self.setCentralWidget(self.main_panel())
 
     def init_menus(self):
-        file_menu_open_settings_action = QAction(icon(self, constants.DESKTOPAPPTEMPLATE_ICON_SETTINGS), 'Settings...', self)
+        file_menu_open_settings_action = QAction('Settings...', self)
         file_menu_open_settings_action.triggered.connect(self.handle_open_settings)
-        file_menu_exit_action = QAction(icon(self, constants.DESKTOPAPPTEMPLATE_ICON_EXIT), 'Exit', self)
+        file_menu_exit_action = QAction('Exit', self)
         file_menu_exit_action.triggered.connect(self.close)
         file_menu = self.menuBar().addMenu('File')
         file_menu.addAction(file_menu_open_settings_action)

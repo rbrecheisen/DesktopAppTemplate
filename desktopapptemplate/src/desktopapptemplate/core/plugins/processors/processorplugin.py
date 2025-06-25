@@ -2,4 +2,5 @@ from desktopapptemplate.core.plugins.plugin import Plugin
 
 
 class ProcessorPlugin(Plugin):
-    pass
+    def __init__(self, name, version):
+        super(ProcessorPlugin, self).__init__(name, version)
