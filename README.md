@@ -20,7 +20,7 @@ Template PySide6 using plugins.
 
 ## User scenarios
 
-Let's say a user wishes to load a CSV files, run some statistics on it and visualize 
+Let's say a user wishes to load a CSV file, run some statistics on it and visualize 
 the results. What would be needed to do that? First of all, we need a CsvDataPlugin
 to capture CSV data. The CsvLoaderPlugin knows how to load a CSV file (e.g., using 
 Pandas). If the CsvLoaderPlugin is available (detected), a new menu item should be

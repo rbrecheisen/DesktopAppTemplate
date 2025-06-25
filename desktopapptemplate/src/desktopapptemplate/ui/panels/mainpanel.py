@@ -38,8 +38,8 @@ class MainPanel(QWidget):
     
     def donate_button(self):
         if not self._donate_button:
-            self._donate_button = QPushButton('Please donate!')
-            self._donate_button.setStyleSheet('background-color: blue; color: white; font-weight: bold;')
+            self._donate_button = QPushButton(constants.DESKTOPAPPTEMPLATE_DONATE_BUTTON_TEXT)
+            self._donate_button.setStyleSheet(constants.DESKTOPAPPTEMPLATE_DONATE_BUTTON_STYLESHEET)
             self._donate_button.clicked.connect(self.handle_donate)
         return self._donate_button
 

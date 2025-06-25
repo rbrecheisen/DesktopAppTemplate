@@ -6,6 +6,8 @@ from PySide6.QtWidgets import (
     QLabel,
 )
 
+import desktopapptemplate.ui.constants as constants
+
 
 class LogPanel(QWidget):
     def __init__(self):
@@ -21,11 +23,11 @@ class LogPanel(QWidget):
     
     def log_panel_title_label(self):
         if not self._log_panel_title_label:
-            self._log_panel_title_label = QLabel('Output log:')
+            self._log_panel_title_label = QLabel(constants.DESKTOPAPPTEMPLATE_LOG_PANEL_TITLE)
         return self._log_panel_title_label
 
     def init_panel(self):
-        button = QPushButton('Clear logs')
+        button = QPushButton(constants.DESKTOPAPPTEMPLATE_LOG_PANEL_CLEAR_LOGS_BUTTON)
         button.clicked.connect(self.handle_clear_logs)
         layout = QVBoxLayout()
         layout.addWidget(self.log_panel_title_label())

@@ -1,4 +1,7 @@
-# singleton()
+from desktopapptemplate.core.singleton import singleton
+
+
+@singleton()
 class DataManager:
     def __init__(self):
         self._data = {}

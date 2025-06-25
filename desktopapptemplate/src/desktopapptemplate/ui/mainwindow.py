@@ -15,6 +15,8 @@ import desktopapptemplate.ui.constants as constants
 from desktopapptemplate.ui.settings import Settings
 from desktopapptemplate.ui.panels.mainpanel import MainPanel
 from desktopapptemplate.ui.utils import resource_path, version, is_macos
+from desktopapptemplate.core.plugins.plugin import Plugin
+from desktopapptemplate.core.plugins.pluginmanager import PluginManager
 
 
 class MainWindow(QMainWindow):
@@ -35,15 +37,26 @@ class MainWindow(QMainWindow):
         self.setCentralWidget(self.main_panel())
 
     def init_menus(self):
-        file_menu_open_settings_action = QAction('Settings...', self)
-        file_menu_open_settings_action.triggered.connect(self.handle_open_settings)
-        file_menu_exit_action = QAction('Exit', self)
-        file_menu_exit_action.triggered.connect(self.close)
-        file_menu = self.menuBar().addMenu('File')
-        file_menu.addAction(file_menu_open_settings_action)
-        file_menu.addAction(file_menu_exit_action)
+        self.init_app_menu()
+        self.init_data_menu()
         if is_macos():            
             self.menuBar().setNativeMenuBar(False)
+
+    def init_app_menu(self):
+        app_menu_open_settings_action = QAction(constants.DESKTOPAPPTEMPLATE_APP_MENU_ITEM_SETTINGS, self)
+        app_menu_open_settings_action.triggered.connect(self.handle_open_settings)
+        app_menu_exit_action = QAction(constants.DESKTOPAPPTEMPLATE_APP_MENU_ITEM_EXIT, self)
+        app_menu_exit_action.triggered.connect(self.close)
+        app_menu = self.menuBar().addMenu(constants.DESKTOPAPPTEMPLATE_APP_MENU)
+        app_menu.addAction(app_menu_open_settings_action)
+        app_menu.addAction(app_menu_exit_action)
+
+    def init_data_menu(self):
+        data_menu = self.menuBar().addMenu('Data')        
+        manager = PluginManager()
+        for plugin in manager.plugins(plugin_type=Plugin.Type.LOADER):
+            data_menu_action = QAction(plugin.display_name(), self)
+            data_menu.addAction(data_menu_action)
 
     def init_status_bar(self):
         self.set_status(constants.DESKTOPAPPTEMPLATE_STATUS_READY)
