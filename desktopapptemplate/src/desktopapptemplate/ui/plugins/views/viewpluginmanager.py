@@ -10,5 +10,5 @@ class ViewPluginManager:
     @staticmethod
     def view_for(plugin):
         if isinstance(plugin, CsvLoaderPlugin):
-            return CsvLoaderViewPLugin('x', 'x', '1.0')
+            return CsvLoaderViewPLugin('x', 'x', '1.0') # Pass plugin as argument?
         return None

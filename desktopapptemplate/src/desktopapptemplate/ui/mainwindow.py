@@ -25,6 +25,7 @@ class MainWindow(QMainWindow):
         super(MainWindow, self).__init__()
         self._settings = None
         self._main_panel = None
+        self._view = None
         self.init_window()
 
     def init_window(self):
@@ -57,7 +58,8 @@ class MainWindow(QMainWindow):
         manager = PluginManager()
         for plugin in manager.plugins(plugin_type=Plugin.Type.LOADER):
             data_menu_action = QAction(plugin.display_name(), self)
-            data_menu_action.triggered.connect(ViewPluginManager.view_for(plugin).show)
+            self._view = ViewPluginManager.view_for(plugin)
+            data_menu_action.triggered.connect(self.handle_loader_plugin_show)
             data_menu.addAction(data_menu_action)
 
     def init_status_bar(self):
@@ -84,6 +86,9 @@ class MainWindow(QMainWindow):
 
     def handle_open_settings(self):
         pass
+
+    def handle_loader_plugin_show(self):
+        self._view.show()
 
     def closeEvent(self, event):
         self.save_geometry_and_state()
