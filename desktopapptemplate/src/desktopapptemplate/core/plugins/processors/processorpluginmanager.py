@@ -5,9 +5,10 @@ from desktopapptemplate.core.plugins.processors.csvprocessorplugin import CsvPro
 class ProcessorPluginManager(PluginManager):
     def __init__(self):
         super(ProcessorPluginManager, self).__init__()
+        self.load_plugins()
 
     def load_plugins(self):
         csvprocessorplugin = CsvProcessorPlugin()
-        return {
+        self._plugins = {
             csvprocessorplugin.name(): csvprocessorplugin,
         }

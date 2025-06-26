@@ -1,9 +1,20 @@
 def singleton(cls):
-    _instances = {}
+    instances = {}
 
-    def instance(*args, **kwargs):
-        if cls not in _instances:
-            _instances[cls] = cls(*args, **kwargs)
-        return _instances[cls]
+    class SingletonWrapper(cls):
+        def __new__(subcls, *args, **kwargs):
+            if subcls not in instances:
+                instances[subcls] = super(SingletonWrapper, subcls).__new__(subcls, *args, **kwargs)
+            return instances[subcls]
     
-    return instance
+    return SingletonWrapper
+
+# def singleton(cls):
+#     _instances = {}
+
+#     def instance(*args, **kwargs):
+#         if cls not in _instances:
+#             _instances[cls] = cls(*args, **kwargs)
+#         return _instances[cls]
+    
+#     return instance

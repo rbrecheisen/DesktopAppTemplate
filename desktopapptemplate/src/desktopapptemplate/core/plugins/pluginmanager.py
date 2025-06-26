@@ -1,3 +1,7 @@
+from desktopapptemplate.core.singleton import singleton
+
+
+@singleton
 class PluginManager:
     def __init__(self):
         self._plugins = {}
@@ -6,9 +10,7 @@ class PluginManager:
         raise NotImplementedError()
 
     def plugins(self):
-        if len(self._plugins.keys()) == 0:
-            self._plugins = self.load_plugins()
-        return self._plugins.values()
+        return self._plugins.items()
     
     def plugin(self, name):
         if name in self._plugins.keys():
