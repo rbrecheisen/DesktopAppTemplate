@@ -1,10 +1,10 @@
+from desktopapptemplate.ui.plugins.loaders.csvloaderviewplugin import CsvLoaderViewPlugin
 from desktopapptemplate.core.plugins.loaders.loaderpluginmanager import LoaderPluginManager
-from desktopapptemplate.ui.plugins.loaders.csvloaderviewplugin import CsvLoaderViewPLugin
 from desktopapptemplate.core.singleton import singleton
 
 
 @singleton
-class PluginManager:
+class ViewPluginManager:
     def __init__(self):
         self._plugins = {}
         self.load_plugins()
@@ -12,7 +12,7 @@ class PluginManager:
     def load_plugins(self):
         manager = LoaderPluginManager()
         csvloaderplugin = manager.plugin('csvloaderplugin')
-        csvloaderviewplugin = CsvLoaderViewPLugin(csvloaderplugin)
+        csvloaderviewplugin = CsvLoaderViewPlugin(csvloaderplugin)
         self._plugins = {
             csvloaderviewplugin.name(): csvloaderviewplugin,
         }

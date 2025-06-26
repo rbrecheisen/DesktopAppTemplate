@@ -1,6 +1,6 @@
-from desktopapptemplate.ui.plugins.loaders.loaderviewplugin import LoaderViewPLugin
+from desktopapptemplate.ui.plugins.loaders.loaderviewplugin import LoaderViewPlugin
 
 
-class CsvLoaderViewPLugin(LoaderViewPLugin):
+class CsvLoaderViewPlugin(LoaderViewPlugin):
     def __init__(self, plugin):
-        super(CsvLoaderViewPLugin, self).__init__('csvloaderviewplugin', 'Load CSV', plugin)
+        super(CsvLoaderViewPlugin, self).__init__('csvloaderviewplugin', 'Load CSV', plugin)
