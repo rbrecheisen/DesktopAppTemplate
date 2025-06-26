@@ -4,8 +4,7 @@ from desktopapptemplate.core.singleton import singleton
 @singleton()
 class DataManager:
     def __init__(self):
-        self._data = {}
+        self._data_plugins = {}
 
-    # Add objects with a DataPlugin interface
-    def add_data(self, data):
+    def add_data_plugin(self, data_plugin):
         pass

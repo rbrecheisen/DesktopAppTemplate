@@ -7,20 +7,30 @@ Template PySide6 using plugins.
 
 - DataPlugin
   ----------
-  Wraps certain types of data, e.g., DICOM images, CT scans, CSV files, etc.
+  Wraps certain types of data, e.g., DICOM images, CT scans, CSV files, etc. It
+  contains methods for accessing the data. For example, with CSV data you can 
+  get the header and rows, as well as individual row items.
+
 - LoaderPlugin
   ------------
   Loads certain types of data, e.g., DICOM images, CT scans, CSV files, etc.
+
 - ProcessorPlugin
   ---------------
   Processes certain types of data, e.g., anonyize DICOM images
+  
 - ViewPlugin
   ----------
   Views certain things
 
 All plugins, except data plugins, are associated with a view plugin that allows
 the user to set their configuration before running them. So the CsvLoaderPlugin
-requires a view plugin for specifying the CSV file path. 
+requires a view plugin for specifying the CSV file path. Once the CSV data is 
+loaded, it should be displayed as a table. That would be a TableView, not a plugin
+because it's a general purpose object that can be reused everywhere. So is there
+a difference between View and ViewPlugin objects? Why not make TableView a plugin
+as well? This would keep it consistent with the rest. The table view plugin will
+always be available in the basic installation.
 
 
 ## User scenarios

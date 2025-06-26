@@ -56,7 +56,7 @@ class MainWindow(QMainWindow):
     def init_data_menu(self):
         data_menu = self.menuBar().addMenu(constants.DESKTOPAPPTEMPLATE_DATA_MENU)
         manager = LoaderPluginManager()
-        for plugin_name, plugin in manager.plugins():
+        for _, plugin in manager.plugins():
             data_menu_action = QAction(f'{plugin.display_name()}...', self)
             data_menu_action.triggered.connect(self.plugin_manager().view_for(plugin).show)
             data_menu.addAction(data_menu_action)
