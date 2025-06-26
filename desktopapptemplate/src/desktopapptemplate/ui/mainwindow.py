@@ -16,7 +16,7 @@ from desktopapptemplate.ui.settings import Settings
 from desktopapptemplate.ui.panels.mainpanel import MainPanel
 from desktopapptemplate.ui.utils import resource_path, version, is_macos
 from desktopapptemplate.core.plugins.plugin import Plugin
-from desktopapptemplate.core.plugins.pluginmanager import PluginManager
+from desktopapptemplate.core.plugins.loaders.loaderpluginmanager import LoaderPluginManager
 from desktopapptemplate.ui.plugins.views.viewpluginmanager import ViewPluginManager
 
 
@@ -54,12 +54,12 @@ class MainWindow(QMainWindow):
         app_menu.addAction(app_menu_exit_action)
 
     def init_data_menu(self):
-        data_menu = self.menuBar().addMenu('Data')        
-        manager = PluginManager()
-        for plugin in manager.plugins(plugin_type=Plugin.Type.LOADER):
+        data_menu = self.menuBar().addMenu(constants.DESKTOPAPPTEMPLATE_DATA_MENU)
+        manager = LoaderPluginManager()
+        for plugin in manager.plugins():
             data_menu_action = QAction(plugin.display_name(), self)
-            self._view = ViewPluginManager.view_for(plugin)
-            data_menu_action.triggered.connect(self.handle_loader_plugin_show)
+            # self._view = ViewPluginManager.view_for(plugin)
+            # data_menu_action.triggered.connect(self.handle_loader_plugin_show)
             data_menu.addAction(data_menu_action)
 
     def init_status_bar(self):

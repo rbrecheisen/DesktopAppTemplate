@@ -2,5 +2,5 @@ from desktopapptemplate.core.plugins.processors.processorplugin import Processor
 
 
 class CsvProcessorPlugin(ProcessorPlugin):
-    def __init__(self, name, display_name, version):
-        super(CsvProcessorPlugin, self).__init__(name, display_name, version)
+    def __init__(self):
+        super(CsvProcessorPlugin, self).__init__('csvprocessorplugin', 'Process CSV')

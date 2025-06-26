@@ -6,16 +6,21 @@ Template PySide6 using plugins.
 ## Plugins
 
 - DataPlugin
+  ----------
   Wraps certain types of data, e.g., DICOM images, CT scans, CSV files, etc.
-
 - LoaderPlugin
+  ------------
   Loads certain types of data, e.g., DICOM images, CT scans, CSV files, etc.
-
 - ProcessorPlugin
+  ---------------
   Processes certain types of data, e.g., anonyize DICOM images
-
 - ViewPlugin
+  ----------
   Views certain things
+
+All plugins, except data plugins, are associated with a view plugin that allows
+the user to set their configuration before running them. So the CsvLoaderPlugin
+requires a view plugin for specifying the CSV file path. 
 
 
 ## User scenarios

@@ -1,14 +1,15 @@
-from desktopapptemplate.core.plugins.pluginmanager import PluginManager
-from desktopapptemplate.core.plugins.loaders.csvloaderplugin import CsvLoaderPlugin
-from desktopapptemplate.ui.plugins.views.loaders.csvloaderviewplugin import CsvLoaderViewPLugin
+from desktopapptemplate.ui.plugins.pluginmanager import PluginManager
 
 
-class ViewPluginManager:
+class ViewPluginManager(PluginManager):
     def __init__(self):
-        self._plugin_manager = PluginManager()
+        super(ViewPluginManager, self).__init__()
 
-    @staticmethod
-    def view_for(plugin):
-        if isinstance(plugin, CsvLoaderPlugin):
-            return CsvLoaderViewPLugin('x', 'x', '1.0') # Pass plugin as argument?
+    def load_plugins(self):
+        pass
+
+    def view(self, name):
+        return self.plugin(name)
+
+    def view_for(self, plugin):
         return None
