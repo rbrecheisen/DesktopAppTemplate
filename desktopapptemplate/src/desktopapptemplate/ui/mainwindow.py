@@ -15,9 +15,8 @@ import desktopapptemplate.ui.constants as constants
 from desktopapptemplate.ui.settings import Settings
 from desktopapptemplate.ui.panels.mainpanel import MainPanel
 from desktopapptemplate.ui.utils import resource_path, version, is_macos
-from desktopapptemplate.core.plugins.plugin import Plugin
 from desktopapptemplate.core.plugins.loaders.loaderpluginmanager import LoaderPluginManager
-from desktopapptemplate.ui.plugins.views.viewpluginmanager import ViewPluginManager
+from desktopapptemplate.ui.plugins.pluginmanager import PluginManager
 
 
 class MainWindow(QMainWindow):
@@ -26,7 +25,7 @@ class MainWindow(QMainWindow):
         self._settings = None
         self._main_panel = None
         self._view = None
-        self._view_plugin_manager = None
+        self._plugin_manager = None
         self.init_window()
 
     def init_window(self):
@@ -59,7 +58,7 @@ class MainWindow(QMainWindow):
         manager = LoaderPluginManager()
         for plugin_name, plugin in manager.plugins():
             data_menu_action = QAction(plugin.display_name(), self)
-            data_menu_action.triggered.connect(self.view_plugin_manager().view_for(plugin).show)
+            data_menu_action.triggered.connect(self.plugin_manager().view_for(plugin).show)
             data_menu.addAction(data_menu_action)
 
     def init_status_bar(self):
@@ -77,10 +76,10 @@ class MainWindow(QMainWindow):
             self._main_panel = MainPanel(self)
         return self._main_panel
     
-    def view_plugin_manager(self):
-        if not self._view_plugin_manager:
-            self._view_plugin_manager = ViewPluginManager()
-        return self._view_plugin_manager
+    def plugin_manager(self):
+        if not self._plugin_manager:
+            self._plugin_manager = PluginManager()
+        return self._plugin_manager
 
     # SETTERS
 

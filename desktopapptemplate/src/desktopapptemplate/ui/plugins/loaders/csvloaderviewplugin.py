@@ -1,4 +1,4 @@
-from desktopapptemplate.ui.plugins.views.loaders.loaderviewplugin import LoaderViewPLugin
+from desktopapptemplate.ui.plugins.loaders.loaderviewplugin import LoaderViewPLugin
 
 
 class CsvLoaderViewPLugin(LoaderViewPLugin):

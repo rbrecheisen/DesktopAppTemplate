@@ -1,3 +1,5 @@
+from desktopapptemplate.core.plugins.loaders.loaderpluginmanager import LoaderPluginManager
+from desktopapptemplate.ui.plugins.loaders.csvloaderviewplugin import CsvLoaderViewPLugin
 from desktopapptemplate.core.singleton import singleton
 
 
@@ -5,9 +7,15 @@ from desktopapptemplate.core.singleton import singleton
 class PluginManager:
     def __init__(self):
         self._plugins = {}
+        self.load_plugins()
 
     def load_plugins(self):
-        raise NotImplementedError()
+        manager = LoaderPluginManager()
+        csvloaderplugin = manager.plugin('csvloaderplugin')
+        csvloaderviewplugin = CsvLoaderViewPLugin(csvloaderplugin)
+        self._plugins = {
+            csvloaderviewplugin.name(): csvloaderviewplugin,
+        }
 
     def plugins(self):
         return self._plugins.items()
@@ -16,3 +24,9 @@ class PluginManager:
         if name in self._plugins.keys():
             return self._plugins[name]
         raise RuntimeError(f'Plugin "{name}" not found')
+    
+    def view_for(self, plugin):
+        for _, view_plugin in self.plugins():
+            if plugin.name() == view_plugin.plugin().name():
+                return view_plugin
+        raise RuntimeError(f'Could not find view plugin for plugin "{plugin.name()}"')
