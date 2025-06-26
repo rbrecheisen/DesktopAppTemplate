@@ -14,7 +14,7 @@ if /I "%~1"=="" (
 ) else if /I "%~1"=="--test" (
 
     cd desktopapptemplate
-    call pytest
+    call pytest -s
 
 ) else if /I "%~1"=="--exe" (
 

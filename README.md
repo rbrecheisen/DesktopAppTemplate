@@ -44,3 +44,24 @@ item is clicked, a dialog window appears where the user can specify the file pat
 the CSV data. Once the CSV data is loaded, it should be made available to the app
 in a centralized manner. How? For this we need a data model hierarchy. Perhaps a
 singleton DataManager?
+
+
+## Thoughts
+
+How should I use plugins? There can be plugins for everything but then it becomes
+very cumbersome to keep them in sync and let them interact with each other. Think
+of plugins as larger system modules. Take the Mosamatic Desktop application: what
+modules can you think of? Loading and analyzing CSV data could be one such module.
+It contains everything to load CSV data, process it and visualize it. That would
+be a single plugin. Or not? Same for Excel data. Actually, Excel and CSV could be
+part of the same plugin. It's just tabular data (with support for multiple file
+extensions, e.g., SPSS data). These plugins can be mirrored in the core and UI.
+If you look at Mosamatic Desktop, we can envision plugins for different tasks, e.g.,
+an DicomImagePlugin (as opposed to TablePlugin). The DicomImagePlugin allows loading of 
+individual DICOM images as well as complete scans. The DicomImageAnonymizationPlugin
+allows anonymization of DICOM images.
+
+Should I use a plugin-based system? How often are you going to need it? You're
+argument is that you want to offer the tool for free but may ask people to give
+you money for developing custom plugins. A plugin in that sense should be independent
+and work without any interference from other plugins. 

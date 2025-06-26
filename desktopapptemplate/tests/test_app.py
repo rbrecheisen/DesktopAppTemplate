@@ -11,5 +11,5 @@ def main_window(qtbot):
     return window
 
 
-def test_first(main_window, qtbot):
-    assert 1 + 1 == 2
+def test_load_csv_data(main_window, qtbot):
+    pass

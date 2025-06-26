@@ -9,10 +9,10 @@ class PluginManager:
     def load_plugins(self):
         raise NotImplementedError()
 
-    def plugins(self):
+    def all(self):
         return self._plugins.items()
     
-    def plugin(self, name):
+    def get(self, name):
         if name in self._plugins.keys():
             return self._plugins[name]
         raise RuntimeError(f'Plugin "{name}" not found')

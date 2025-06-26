@@ -25,7 +25,7 @@ class MainWindow(QMainWindow):
         self._settings = None
         self._main_panel = None
         self._view = None
-        self._plugin_manager = None
+        self._view_plugin_manager = None
         self.init_window()
 
     def init_window(self):
@@ -56,9 +56,9 @@ class MainWindow(QMainWindow):
     def init_data_menu(self):
         data_menu = self.menuBar().addMenu(constants.DESKTOPAPPTEMPLATE_DATA_MENU)
         manager = LoaderPluginManager()
-        for _, plugin in manager.plugins():
+        for _, plugin in manager.all():
             data_menu_action = QAction(f'{plugin.display_name()}...', self)
-            data_menu_action.triggered.connect(self.plugin_manager().view_for(plugin).show)
+            data_menu_action.triggered.connect(self.view_plugin_manager().view_for(plugin).show)
             data_menu.addAction(data_menu_action)
 
     def init_status_bar(self):
@@ -76,10 +76,10 @@ class MainWindow(QMainWindow):
             self._main_panel = MainPanel(self)
         return self._main_panel
     
-    def plugin_manager(self):
-        if not self._plugin_manager:
-            self._plugin_manager = ViewPluginManager()
-        return self._plugin_manager
+    def view_plugin_manager(self):
+        if not self._view_plugin_manager:
+            self._view_plugin_manager = ViewPluginManager()
+        return self._view_plugin_manager
 
     # SETTERS
 
